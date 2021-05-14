@@ -18,7 +18,6 @@ locals {
 
   private_a              = "${compact(concat(digitalocean_record.private_a.*.fqdn, tolist([""])))}"
   public_a               = "${compact(concat(digitalocean_record.public_a.*.fqdn, tolist([""])))}"
-  public_aaaa            = "${compact(concat(digitalocean_record.public_aaaa.*.fqdn, tolist([""])))}"
   volume_id              = "${compact(concat(digitalocean_volume.volume.*.id, tolist([""])))}"
   volume_filesystem_type = "${compact(concat(digitalocean_volume.volume.*.initial_filesystem_type, tolist([""])))}"
   volume_droplet_ids     = "${compact(concat(flatten(digitalocean_volume.volume.*.droplet_ids), tolist([""])))}"
@@ -88,11 +87,6 @@ output "private_a" {
 output "public_a" {
   description = "List of Droplet public DNS A record FQDNs."
   value       = local.public_a
-}
-
-output "public_aaaa" {
-  description = "List of Droplet public DNS AAAA record FQDNs."
-  value       = local.public_aaaa
 }
 
 output "region" {
