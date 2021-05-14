@@ -1,16 +1,16 @@
 locals {
   // Map of pre-named sizes to look up from
   sizes = {
-    nano      = "s-1vcpu-1gb"
+    nano        = "s-1vcpu-1gb"
     s-1vcpu-2gb = "s-1vcpu-2gb"
-    micro     = "s-2vcpu-2gb"
-    small     = "s-2vcpu-4gb"
-    medium    = "s-4vcpu-8gb"
-    large     = "s-6vcpu-16gb"
-    x-large   = "s-8vcpu-32gb"
-    xx-large  = "s-16vcpu-64gb"
-    xxx-large = "s-24vcpu-128gb"
-    maximum   = "s-32vcpu-192gb"
+    micro       = "s-2vcpu-2gb"
+    small       = "s-2vcpu-4gb"
+    medium      = "s-4vcpu-8gb"
+    large       = "s-6vcpu-16gb"
+    x-large     = "s-8vcpu-32gb"
+    xx-large    = "s-16vcpu-64gb"
+    xxx-large   = "s-24vcpu-128gb"
+    maximum     = "s-32vcpu-192gb"
   }
 }
 
@@ -131,17 +131,6 @@ resource "digitalocean_record" "public_a" {
   ttl    = 60
   name   = element(digitalocean_droplet.droplet.*.name, count.index)
   value  = element(digitalocean_droplet.droplet.*.ipv4_address, count.index)
-}
-
-// Public DNS AAAA Record
-resource "digitalocean_record" "public_aaaa" {
-  count = length(var.public_domain) > 0 ? var.droplet_count : 0
-
-  domain = var.public_domain
-  type   = "AAAA"
-  ttl    = 60
-  name   = element(digitalocean_droplet.droplet.*.name, count.index)
-  value  = element(digitalocean_droplet.droplet.*.ipv6_address, count.index)
 }
 
 // Private DNS A Record
