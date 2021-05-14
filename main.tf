@@ -2,6 +2,7 @@ locals {
   // Map of pre-named sizes to look up from
   sizes = {
     nano      = "s-1vcpu-1gb"
+    s-1vcpu-2gb = "s-1vcpu-2gb"
     micro     = "s-2vcpu-2gb"
     small     = "s-2vcpu-4gb"
     medium    = "s-4vcpu-8gb"
